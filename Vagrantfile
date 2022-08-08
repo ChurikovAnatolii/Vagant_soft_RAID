@@ -120,7 +120,7 @@ config.vm.define "server" do |server|
   #config.vm.box_version = "2011.0"
   server.vm.host_name = 'server'
   #server.vm.network :private_network, ip: "10.0.0.41"
-  server.vm.provision :shell, privileged: false, path: "scripts/raid_add.sh"
+  server.vm.provision :shell, privileged: false, path: "raid_add.sh"
 
   server.vm.provider "virtualbox" do |vb|
     vb.memory = "1024"
