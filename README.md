@@ -96,7 +96,11 @@ nvme0n5      259:4    0    1G  0 disk
 nvme0n6      259:5    0    1G  0 disk  
 nvme0n7      259:6    0    1G  0 disk 
 
-6. Для автоматической загрузки добавлен файл mdadm.conf
+6. Для автоматической загрузки конфигурации рейда добавлен файл mdadm.conf
 
 ARRAY /dev/md/raid10 metadata=1.2 name=server:raid10 UUID=8b3c7497:f533b129:f62cd12e:56f016f5
+
+7. В fstab добавлена запись для автоматического примонтирования при загрузке:
+
+ echo '/dev/md/raid10                /home/vagrant/raid_mount              ext4    defaults        0 0' >> /etc/fstab
 
