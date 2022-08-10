@@ -1,6 +1,6 @@
 #!/bin/bash
-
 # Install mdadm and gdisk
+
 yum install -y mdadm
 yum install -y gdisk
 
@@ -12,12 +12,12 @@ mdadm --detail --scan --verbose >> /etc/mdadm.conf
 mkfs.ext4 /dev/md/raid10
 cd
 mkdir raid_mount
-mount /dev/md/raid10 /home/vagrant/raid_mount
+mount /dev/md/raid10 /root/raid_mount
 
 # config mount options after reboot the system
-echo '/dev/md/raid10                /home/vagrant/raid_mount              ext4    defaults        0 0' >> /etc/fstab' >> /etc/fstab
+echo '/dev/md/raid10                /root/raid_mount              ext4    defaults        0 0' >> /etc/fstab
 
 # create 5 partitions 
 for i in {1..10} ; do
         sudo sgdisk -n ${i}:0:+100M /dev/nvme0n1
-
+done
