@@ -25,7 +25,7 @@ done
 umount /dev/md127 
 mdadm --stop /dev/md127 
 mdadm: stopped /dev/md127
-lsblk
+
 NAME         MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
 sda            8:0    0 19.5G  0 disk 
 |-sda1         8:1    0    2G  0 part [SWAP]
