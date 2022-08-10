@@ -98,5 +98,5 @@ nvme0n7      259:6    0    1G  0 disk
 
 6. Для автоматической загрузки добавлен файл mdadm.conf
 
-RRAY /dev/md/raid10 metadata=1.2 name=server:raid10 UUID=8b3c7497:f533b129:f62cd12e:56f016f5
+ARRAY /dev/md/raid10 metadata=1.2 name=server:raid10 UUID=8b3c7497:f533b129:f62cd12e:56f016f5
 
