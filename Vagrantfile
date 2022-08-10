@@ -117,6 +117,9 @@ Vagrant.configure("2") do |config|
 config.vm.define "server" do |server|
   #config.vm.box = 'centos/8'
   config.vm.box = 'almalinux/8'
+  config.ssh.username = 'root'
+  config.ssh.password = 'vagrant'
+  config.ssh.insert_key = 'true'
   #config.vm.box_version = "2011.0"
   server.vm.host_name = 'server'
   #server.vm.network :private_network, ip: "10.0.0.41"
@@ -133,3 +136,4 @@ config.vm.define "server" do |server|
 end
 
 end
+
