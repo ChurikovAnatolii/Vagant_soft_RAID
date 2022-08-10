@@ -2,22 +2,34 @@
 1. В вагрант файл прописано создание дополнительных дисков (2 sd и 2 nvme)
 2. Написан скрипт по созданию и монтированию рейд-массива и созданию GPT c пятью разделами:
 
+
 #!/bin/bash
+# Install mdadm and gdisk
 
-sudo yum install -y mdadm\
-sudo yum install -y gdisk\
+yum install -y mdadm
+yum install -y gdisk
 
-sudo mdadm --create /dev/md/raid10 --level=5 --raid-devices=4 /dev/sdd /dev/sde /dev/sdf /dev/sdg\
-sudo mkfs.ext4 /dev/md/raid10\
-sudo cd\
-sudo mkdir raid_mount\
-sudo mount /dev/md/raid10 /home/vagrant/raid_mount\
-for i in {1..10} ; do\
-        sudo sgdisk -n ${i}:0:+100M /dev/nvme0n1\
+# Create array and make config file
+mdadm --create /dev/md/raid10 --level=5 --raid-devices=4 /dev/sdd /dev/sde /dev/sdf /dev/sdg
+mdadm --detail --scan --verbose >> /etc/mdadm.conf
+
+# Create filesystem and mount point 
+mkfs.ext4 /dev/md/raid10
+cd
+mkdir raid_mount
+mount /dev/md/raid10 /root/raid_mount
+
+# config mount options after reboot the system
+echo '/dev/md/raid10                /root/raid_mount              ext4    defaults        0 0' >> /etc/fstab
+
+# create 5 partitions 
+for i in {1..10} ; do
+        sudo sgdisk -n ${i}:0:+100M /dev/nvme0n1
 done
 
 
-3. В вагрант файл добавлено выполнение данного скрипта в раздел provision.
+
+3. В вагрант файл добавлено выполнение данного скрипта в раздел provision + добавлен вход по ssh от рута.
 
 
 4. Raid остановлен: 
