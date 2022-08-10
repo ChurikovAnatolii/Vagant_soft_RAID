@@ -98,7 +98,9 @@ nvme0n7      259:6    0    1G  0 disk
 
 6. Для автоматической загрузки конфигурации рейда добавлен файл mdadm.conf
 
-ARRAY /dev/md/raid10 metadata=1.2 name=server:raid10 UUID=8b3c7497:f533b129:f62cd12e:56f016f5
+ARRAY /dev/md/raid10 level=raid5 num-devices=4 metadata=1.2 spares=1 name=server:raid10 UUID=6e9dcdcf:2f9f3bbf:4ccc68e7:802a5d6c
+   devices=/dev/sdd,/dev/sde,/dev/sdf,/dev/sdg
+
 
 7. В fstab добавлена запись для автоматического примонтирования при загрузке:
 
